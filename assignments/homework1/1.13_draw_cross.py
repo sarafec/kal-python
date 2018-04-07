@@ -1,13 +1,15 @@
+# todo: currently drawing with 4 lines can we draw it with two?
+
 import turtle
 turtle.pensize(5)
 turtle.color("violet")
 
-coordinatePairs = [[[0, -100], [-200, -100]], [[-100, 0], [-100, -200]]]
+coordinatePairs = [[[0, -100], [0, 100]], [[0, 0], [0, 0]],[[-100, 0], [100, 0]], [[0,0], [0,0]]]
 
 def drawLine(start, end):
-	turtle.setposition(start)
+	turtle.setposition(start[0], start[1])
 	turtle.penup()
-	turtle.goto(end)
+	turtle.goto(end[0], end[1])
 	turtle.pendown()
 
 
