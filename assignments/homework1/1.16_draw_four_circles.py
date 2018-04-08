@@ -4,7 +4,7 @@ turtle.color("purple")
 
 startingCoordinates = [[-50,0], [50,0], [-50, -100], [50, -100]]
 
-def drawTriangle(start):
+def drawCircle(start):
 	turtle.penup()
 	turtle.goto(start)
 	turtle.pendown()
@@ -13,6 +13,6 @@ def drawTriangle(start):
 
 
 for i in range(len(startingCoordinates)):
-	drawTriangle(startingCoordinates[i])
+	drawCircle(startingCoordinates[i])
 
 turtle.done()
