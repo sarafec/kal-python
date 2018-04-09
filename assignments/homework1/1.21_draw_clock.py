@@ -1,3 +1,5 @@
+# todo: clear up redundancy and make a function that allows you to customize the hour/minute input
+
 import turtle
 turtle.pensize(5)
 turtle.color("black")
