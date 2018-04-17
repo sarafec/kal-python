@@ -1,5 +1,3 @@
-# todo: output string with number values and set days to be fixed
-
 import math
 
 def displayYearsDays():
@@ -17,6 +15,6 @@ def displayYearsDays():
 	# calculate days
 	days = minutes/MIN_IN_DAY;
 
-	print(years, days)
+	print(minutes, "minutes is", years, "years and", days, "days")
 
 displayYearsDays()

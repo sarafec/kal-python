@@ -1,6 +1,9 @@
+# todo: can we get this done with fewer lines of code?
+
 import math
 
-def sumAllDigits(num):
+def sumAllDigits():
+	num = int(input("enter a number between 0 and 1000: "))
 	hundreds = 0
 	tens = 0
 	ones = 0
@@ -18,7 +21,4 @@ def sumAllDigits(num):
 
 	print(hundreds + tens + ones)
 
-sumAllDigits(123)
-sumAllDigits(5)
-sumAllDigits(0)
-sumAllDigits(25)
+sumAllDigits()

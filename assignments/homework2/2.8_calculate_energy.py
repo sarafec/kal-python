@@ -1,5 +1,3 @@
-# todo: print output as string - unit for energy is joules 
-
 def calculateEnergy():
 	waterInKg = eval(input("Enter amount of water in kilograms: "))
 	initialTemp = eval(input("Enter initial temperature: "))
@@ -7,6 +5,6 @@ def calculateEnergy():
 	
 	energy = waterInKg * (finalTemp - initialTemp) * 4184
 	
-	print(energy)
+	print(energy, "joules")
 
 calculateEnergy()
