@@ -1,28 +1,23 @@
 # luhn validation
 
-
 def isValid(num):
 	numList = list(map(int,str(num)))
 	morphDigits(numList)
 	totalSum = sumOfEvenPlace(numList) + sumofOddPlace(numList)
-	print(totalSum % 10 == 0)
+	print(isDivisibleByTen(totalSum))
 
-# todo: clean up this fn
 def morphDigits(numList):
 	for i in range(0, len(numList)):
-		if i % 2 == 0:
+		if isEven(i):
 			numList[i] = numList[i] * 2
 			while numList[i] > 9:
 				tempList = list(map(int,str(numList[i])))
-				sum = 0
-				for num in tempList:
-					sum = sum + num 
-				numList[i] = sum
+				numList[i] = sumElements(tempList)
 
 def sumOfEvenPlace(numList):
 	tempList = []
 	for i in range(0, len(numList)):
-		if i % 2 == 0:
+		if isEven(i):
 			tempList.append(numList[i])
 	return sumElements(tempList)
 
@@ -30,16 +25,35 @@ def sumOfEvenPlace(numList):
 def sumofOddPlace(numList):
 	tempList = []
 	for i in range(0, len(numList)):
-		if i % 2 == 1:
+		if isOdd(i):
 			tempList.append(numList[i])
 	return sumElements(tempList)
 
+
+
+### Utility Functions ###
+def isOdd(num):
+	if num % 2 == 1:
+		return True
+	else:
+		return False
+
+def isEven(num):
+	if num % 2 == 0:
+		return True
+	else: 
+		return False
+
+def isDivisibleByTen(num):
+	if num % 10 == 0:
+		return True
+	else:
+		return False
 
 def sumElements(list):
 	sum = 0
 	for elem in list:
 		sum = sum + elem
 	return sum
-
 
 isValid(4388576018402626)
