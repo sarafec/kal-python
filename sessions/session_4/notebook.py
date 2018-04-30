@@ -1,4 +1,4 @@
-from Notes import Note 
+from notes import Note 
 
 class Notebook:
 	'''

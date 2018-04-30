@@ -1,5 +1,5 @@
-from sys
-from Notebook import Notebook, Note
+import sys
+from notebook import Notebook, Note
 
 class Menu:
 	def __init__(self):
@@ -47,4 +47,25 @@ class Menu:
 	def search_notes(self):
 		filter = input("Search for: ")
 		notes = self.notebook.search(filter)
+		self.show_notes(notes)
 
+	def modify_note(self):
+		id = int(input("Enter a node id: "))
+		memo = input("Enter a memo: ")
+		tags = input("Enter tags: ")
+
+		if memo:
+			self.notebook.modify_memo(id, memo)
+
+		if tags:
+			self.notebook.modify_tags(id, tags)
+
+	def show_notes(self, notes=None):
+		if not notes:
+			notes = self.notebook.notes 
+
+		for note in notes:
+			print("{0}: {1} \n{2} ".format(note.getId(), note.memo, note.tags))
+
+menu = Menu()
+menu.run()
