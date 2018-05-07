@@ -1,9 +1,9 @@
 class Account:
-	def __init__(self):
-		self.__id = 0
-		self.__balance = 0
-		self.__annualInterestRate = 0
-
+	def __init__(self, id=0, balance=0, annualInterestRate=0):
+		self.__id = id
+		self.__balance = balance
+		self.__annualInterestRate = annualInterestRate
+		
 		# accessor methods
 		def getId(self):
 			return self.__id
@@ -13,7 +13,6 @@ class Account:
 
 		def getAnnualInterestRate(self):
 			return self.__annualInterestRate
-
 
 		# mutator methods
 		def setId(self, num):
@@ -25,7 +24,6 @@ class Account:
 		def setAnnualInterestRate(self, rate):
 			self.__annualInterestRate = rate
 
-
 		# methods
 		def getMonthlyInterestRate(self):
 			return self.getAnnualInterestRate() / 12
@@ -34,10 +32,9 @@ class Account:
 			return (self.__balance * self.getMonthlyInterestRate())/100
 
 		def withdraw(self, amt):
-			self.setBalance(amt)
+			self.setBalance(-amt)
 			print("You've withdrawn ", amt, " from your account. You have a balance of ", self.getBalance())
-
 
 		def deposit(self, amt):
 			self.setBalance(amt)
-			print("You've deposited ", amt," You have a balance of ", self.getBalance())
+			print("You've deposited ", amt, " You have a balance of ", self.getBalance())

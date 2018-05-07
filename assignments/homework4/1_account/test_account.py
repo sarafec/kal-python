@@ -1,12 +1,13 @@
 from account import Account
 
-myAccount = Account()
-myAccount.setId(1122)
-myAccount.setBalance(20000)
-myAccount.setAnnualInterestRate(4.5)
-myAccount.widthdraw(2500)
-myAccount.deposit(3000)
-myAccount.getId()
-myAccount.getBalance()
-myAccount.getMonthlyInterestRate()
-myAccount.getMonthlyInterest()
+
+def printAccountDetails(id, balance, interestRate, withdrawAmt, depositAmt):
+	myAccount = Account(id, balance, interestRate)
+	myAccount.withdraw(withdrawAmt)
+	myAccount.deposit(depositAmt)
+	print("Account no.", myAccount.getId())
+	print("Balance:", myAccount.getBalance())
+	print("Monthly Interest Rate:", myAccount.getMonthlyInterestRate())
+	print("Monthly Interest:", myAccount.getMonthlyInterest())
+
+printAccountDetails(1122, 20000, 4.5, 2500, 3000)

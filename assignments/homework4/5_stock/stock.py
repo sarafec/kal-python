@@ -1,9 +1,9 @@
 class Stock:
-	def __init__(self):
-		self.__symbol 					# todo: how to initialize value
-		self.__name						# todo: how to initialize value
-		self.__previousClosingPrice		# todo: how to initialize value
-		self.__currentPrice				# todo: how to initialize value
+	def __init__(self, symbol, name, previousClosingPrice, currentPrice):
+		self.__symbol = symbol
+		self.__name	= name
+		self.__previousClosingPrice = previousClosingPrice
+		self.__currentPrice = currentPrice
 
 	# accessor methods
 	def getSymbol(self):
@@ -26,4 +26,4 @@ class Stock:
 		self.__currentPrice = price
 
 	def getChangePercent(self):
-		return (self.__currentPrice/self.__previousClosingPrice) * 100
+		return ((self.__currentPrice-self.__previousClosingPrice)/self.__previousClosingPrice) * 100

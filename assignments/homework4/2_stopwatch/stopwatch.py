@@ -1,9 +1,9 @@
 import time
 
 class StopWatch:
-	def __init__(self):
-		self.__startTime = time.time()
-		self.__endTime = time.time()
+	def __init__(self, startTime):
+		self.__startTime = startTime
+		self.__endTime = self.stop() # is that right?
 
 	#accessor methods
 	def getStartTime(self):
@@ -19,6 +19,4 @@ class StopWatch:
 		self.__endTime = time.time()
 
 	def getElapsedTime(self):
-		startTime = start()
-		endTime = stop()
-		return endTime - startTime 
+		return self.__endTime - self.__startTime 

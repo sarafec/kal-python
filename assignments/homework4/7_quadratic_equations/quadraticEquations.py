@@ -19,15 +19,8 @@ class QuadraticEquation:
 		return (self.__b ** 2) - (4 * self.__a * self.__c)
 
 	def getRoot1(self):
-		discriminant = self.getDiscriminant()
-		if discriminant < 0:
-			return 0
-		else:
-			return ((-self.__b + math.sqrt(discriminant)/(2 * self.__a))
-	
+		return ((-self.__b + math.sqrt((self.__b ** 2) - (4 * self.__a * self.__c))/(2 * self.__a))
+
+	# todo: fix syntax error
 	def getRoot2(self):
-		discriminant = self.getDiscriminant()
-		if discriminant < 0:
-			return 0
-		else:
-			return ((-self.__b - math.sqrt(discriminant)/(2 * self.__a))
+		return ((-self.__b - math.sqrt((self.__b ** 2) - (4 * self.__a * self.__c))/(2 * self.__a))
