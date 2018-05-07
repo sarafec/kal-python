@@ -20,13 +20,23 @@ class LoanCalculator:
 		Entry(window, textvariable=self.loanAmountVar, justify=RIGHT).grid(row=3, column=2)
 
 		self.monthlyPaymentVar = StringVar()
-		Label(window, textvariable=self.monthlyPaymentVar).grid(row=4, column=2)
+		Label(window, textvariable=self.monthlyPaymentVar).grid(row=4, column=2, sticky=E)
 
-		self.totalAmountVar = StringVar()
-		Label(window, textvariable=self.totalAmountVar).grid(row=5, column=2)
+		self.totalPaymentVar = StringVar()
+		Label(window, textvariable=self.totalPaymentVar).grid(row=5, column=2, sticky=E)
 
-		Button(window, text="Compute Payment", command=self.computePayment).grid(row=6, column=2)
+		Button(window, text="Compute Payment", command=self.computePayment).grid(row=6, column=2, sticky=E)
 
 		window.mainloop()
+
+		def computePayment(self):
+			monthlyPayment = self.getMonthlyPayment(float(self.loanAmountVar.get()), float(self.annualInterestRateVar.get())/12, int(self.numberOfYearsVar.get()))
+			totalPayment = monthlyPayment * 12 * int(self.numberOfYearsVar.get())
+			self.monthlyPaymentVar.set(format(monthlyPayment, "10.2f"))
+			self.totalPaymentVar.set(format(totalPayment, "10.2f"))
+
+		def getMonthlyPayment(self, loanAmount, monthlyInterestRate, numberOfYears):
+			monthlyPayment = loanAmount * monthlyInterestRate / (1 - 1/(1 + monthlyInterestRate)**(numberOfYears * 12))
+			return monthlyPayment
 
 LoanCalculator()
