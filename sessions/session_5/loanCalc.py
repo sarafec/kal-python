@@ -29,14 +29,14 @@ class LoanCalculator:
 
 		window.mainloop()
 
-		def computePayment(self):
-			monthlyPayment = self.getMonthlyPayment(float(self.loanAmountVar.get()), float(self.annualInterestRateVar.get())/12, int(self.numberOfYearsVar.get()))
-			totalPayment = monthlyPayment * 12 * int(self.numberOfYearsVar.get())
-			self.monthlyPaymentVar.set(format(monthlyPayment, "10.2f"))
-			self.totalPaymentVar.set(format(totalPayment, "10.2f"))
+	def computePayment(self):
+		monthlyPayment = self.getMonthlyPayment(float(self.loanAmountVar.get()), float(self.annualInterestRateVar.get())/12, int(self.numberOfYearsVar.get()))
+		totalPayment = monthlyPayment * 12 * int(self.numberOfYearsVar.get())
+		self.monthlyPaymentVar.set(format(monthlyPayment, "10.2f"))
+		self.totalPaymentVar.set(format(totalPayment, "10.2f"))
 
-		def getMonthlyPayment(self, loanAmount, monthlyInterestRate, numberOfYears):
-			monthlyPayment = loanAmount * monthlyInterestRate / (1 - 1/(1 + monthlyInterestRate)**(numberOfYears * 12))
-			return monthlyPayment
+	def getMonthlyPayment(self, loanAmount, monthlyInterestRate, numberOfYears):
+		monthlyPayment = loanAmount * monthlyInterestRate / (1 - 1/(1 + monthlyInterestRate)**(numberOfYears * 12))
+		return monthlyPayment
 
 LoanCalculator()
