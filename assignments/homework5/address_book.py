@@ -4,11 +4,11 @@ class LoanCalculator:
 	def __init__(self):
 		window = Tk()
 		window.title("Address Book")
-		Label(window, text="Name").grid(row=1, column=1, sticky=W)
-		Label(window, text="Street").grid(row=2, column=1, sticky=W)
-		Label(window, text="City").grid(row=3, column=1, sticky=W)
-		Label(window, text="State").grid(row=3, column=3, sticky=W)
-		Label(window, text="ZIP").grid(row=3, column=5, sticky=W)
+		Label(window, text="Name").grid(row=1, column=1, columnspan=2, sticky=W)
+		Label(window, text="Street").grid(row=2, column=1, columnspan=2, sticky=W)
+		Label(window, text="City").grid(row=3, column=1, columnspan=2, sticky=W)
+		Label(window, text="State").grid(row=3, column=3, columnspan=1)
+		Label(window, text="ZIP").grid(row=3, column=5, columnspan=1)
 
 		self.nameVar = StringVar()
 		Entry(window, textvariable=self.nameVar, justify=RIGHT).grid(row=1, column=2)
@@ -20,10 +20,10 @@ class LoanCalculator:
 		Entry(window, textvariable=self.cityVar, justify=RIGHT).grid(row=3, column=2)
 
 		self.stateVar = StringVar()
-		Entry(window, textvariable=self.stateVar).grid(row=3, column=4)
+		Entry(window, textvariable=self.stateVar).grid(row=3, column=4, columnspan=1)
 
 		self.zipVar = StringVar()
-		Entry(window, textvariable=self.zipVar).grid(row=3, column=6)
+		Entry(window, textvariable=self.zipVar).grid(row=3, column=6, columnspan=1)
 
 		Button(window, text="Add", command=self.saveEntry).grid(row=5, column=1)
 		Button(window, text="First", command=self.getFirstEntry).grid(row=5, column=2)
@@ -33,9 +33,7 @@ class LoanCalculator:
 
 		window.mainloop()
 
-		#todo: fit in space better
-		#todo: hook up buttons to  local or persistant storage
-
+	#todo: hook up buttons to  local or persistant storage
 	def saveEntry(self):
 		print("Entry saved!")
 
