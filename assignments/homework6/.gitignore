@@ -1,0 +1,8 @@
+# sql environment variables
+*.ini
+__pycache__/
+*.pyc
+*.pyo
+*.xml
+.vscode/
+.idea/

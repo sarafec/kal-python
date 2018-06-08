@@ -1,11 +1,11 @@
 from tkinter import *
-from entry import AddressEntry
+from write_db import writeToDb
+from read_db import getEntryFromDb, findLastId
 
 class AddressBook:
 	def __init__(self):
-		self.entries = []
-		self.currentEntry = 0
 		window = Tk()
+		self.currentAddressId = 1
 		window.title("Address Book")
 		Label(window, text="Name").grid(row=1, column=1, columnspan=2, sticky=W)
 		Label(window, text="Street").grid(row=2, column=1, columnspan=2, sticky=W)
@@ -25,7 +25,7 @@ class AddressBook:
 		self.stateVar = StringVar()
 		Entry(window, textvariable=self.stateVar).grid(row=3, column=4, columnspan=1)
 
-		self.zipVar = StringVar()
+		self.zipVar = IntVar()
 		Entry(window, textvariable=self.zipVar).grid(row=3, column=6, columnspan=1)
 
 		Button(window, text="Add", command=self.saveEntry).grid(row=5, column=1)
@@ -38,41 +38,30 @@ class AddressBook:
 		window.mainloop()
 
 	def saveEntry(self):
-		#todo: use address entry class instead of plain list
-		# addressEntry = AddressEntry(self.nameVar.get(), self.streetVar.get(), self.cityVar.get(), self.stateVar.get(), self.zipVar.get())
-		addressEntry = [self.nameVar.get(), self.streetVar.get(), self.cityVar.get(), self.stateVar.get(), self.zipVar.get()]
-		self.entries.append(addressEntry)
+		writeToDb(self.nameVar.get(), self.streetVar.get(), self.cityVar.get(), self.stateVar.get(), self.zipVar.get())
 		self.resetUI()
 
 	def getFirstEntry(self):
-		targetName, targetStreet, targetCity, targetState, targetZip = self.entries[0]
+		self.currentAddressId = 1
+		idNum, targetName, targetStreet, targetCity, targetState, targetZip = getEntryFromDb(self.currentAddressId)
 		self.modifyUI(targetName, targetStreet, targetCity, targetState, targetZip)
-		self.currentEntry = 0
 
 	def getNextEntry(self):
-		if (self.currentEntry + 1) > (len(self.entries) - 1):
-			self.currentEntry = 0
-		else:
-			self.currentEntry += 1
-
-		targetName, targetStreet, targetCity, targetState, targetZip = self.entries[self.currentEntry]
+		nextId = self.setValidId(self.currentAddressId + 1)
+		self.currentAddressId = nextId
+		idNum, targetName, targetStreet, targetCity, targetState, targetZip = getEntryFromDb(self.currentAddressId)
 		self.modifyUI(targetName, targetStreet, targetCity, targetState, targetZip)
 
-
 	def getPrevEntry(self):
-		if (self.currentEntry - 1) < 0:
-			self.currentEntry = (len(self.entries) - 1)
-		else:
-			self.currentEntry -= 1
-
-		targetName, targetStreet, targetCity, targetState, targetZip = self.entries[self.currentEntry]
+		prevId = self.setValidId(self.currentAddressId - 1)
+		self.currentAddressId = prevId
+		idNum, targetName, targetStreet, targetCity, targetState, targetZip = getEntryFromDb(self.currentAddressId)
 		self.modifyUI(targetName, targetStreet, targetCity, targetState, targetZip)
 
 	def getLastEntry(self):
-		numberOfEntries = len(self.entries)
-		targetName, targetStreet, targetCity, targetState, targetZip = self.entries[numberOfEntries - 1]
+		self.currentAddressId = findLastId()
+		idNum, targetName, targetStreet, targetCity, targetState, targetZip = getEntryFromDb(self.currentAddressId)
 		self.modifyUI(targetName, targetStreet, targetCity, targetState, targetZip)
-		self.currentEntry = numberOfEntries - 1
 
 	def modifyUI(self, targetName, targetStreet, targetCity, targetState, targetZip):
 		self.nameVar.set(targetName)
@@ -88,6 +77,17 @@ class AddressBook:
 		self.stateVar.set('')
 		self.zipVar.set('')
 
+	def setValidId(self, id):
+		maxId = findLastId()
+		if id == 0:
+			return maxId
+		elif id == maxId + 1:
+			return 1
+		else:
+			return id
 
 
 AddressBook()
+
+# issues: it is easy to dupliate rows in the table by pressing add while looking through submtited entries
+# improvements: create edit mode for entries that already exist
